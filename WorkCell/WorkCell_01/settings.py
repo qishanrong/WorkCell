@@ -14,6 +14,10 @@ BOT_NAME = 'WorkCell_01'
 SPIDER_MODULES = ['WorkCell_01.spiders']
 NEWSPIDER_MODULE = 'WorkCell_01.spiders'
 
+REDIS_URL = 'redis://192.168.30.110:6379'
+SCHEDULER = 'scrapy_redis.scheduler.Scheduler'
+DUPEFILTER_CLASS = 'scrapy_redis.dupefilter.RFPDupeFilter'
+
 USER_AGENT_LIST=[
  "Mozilla/5.0 (Windows NT 6.1; WOW65) AppleWebKit/537.1 (KHTML, like Gecko) Chrome/22.0.1207.1 Safari/537.1",
  "Mozilla/5.0 (X11; CrOS i686 2268.111.0) AppleWebKit/536.11 (KHTML, like Gecko) Chrome/20.0.1132.57 Safari/536.11",
@@ -87,9 +91,10 @@ DOWNLOADER_MIDDLEWARES = {
 ITEM_PIPELINES = {
    # 'WorkCell_01.pipelines.Workcell01Pipeline': 300,
    # 'WorkCell_01.pipelines.MongodbPipeline': 300,
-   'WorkCell_01.pipelines.MySQLPipeline': 300,
+   # 'WorkCell_01.pipelines.MySQLPipeline': 300,
+   'scrapy_redis.pipelines.RedisPipeline': 300,
 }
-
+SCHEDULER_PERSIST = False
 # Enable and configure the AutoThrottle extension (disabled by default)
 # See https://docs.scrapy.org/en/latest/topics/autothrottle.html
 #AUTOTHROTTLE_ENABLED = True

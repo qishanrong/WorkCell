@@ -2,14 +2,15 @@
 import scrapy
 import json
 from WorkCell_01.items import Workcell01Item
+from scrapy_redis.spiders import RedisSpider
 
 
-class WorkcellSpider(scrapy.Spider):
+class WorkcellSpider(RedisSpider):
     BASE_URL = 'https://api.bilibili.com/pgc/review/short/list?media_id=102392&ps=20&sort=0&cursor={}'
-    name = 'workcell'
+    name = 'workcell01'
     allowed_domains = ['api.bilibili.com']
     # start_urls = [BASE_URL.format('78782601543127')]
-    start_urls = ['https://api.bilibili.com/pgc/review/short/list?media_id=102392&ps=20&sort=0']
+    # start_urls = ['https://api.bilibili.com/pgc/review/short/list?media_id=102392&ps=20&sort=0']
     def parse(self, response):
         print(response.url)
         resdata = json.loads(response.body_as_unicode())

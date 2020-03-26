@@ -7,4 +7,4 @@
 
 from scrapy import cmdline
 
-cmdline.execute('scrapy crawl workcell'.split())
+cmdline.execute('scrapy crawl workcell01'.split())
